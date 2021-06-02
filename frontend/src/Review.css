@@ -1,0 +1,24 @@
+.Container{
+    display: flex;
+    flex-direction: vertical;
+    justify-content: center;
+    align-items: stretch;
+    margin: 20% 30%;
+    background-color: #eee;
+
+}
+
+form {
+    margin: 40px;
+}
+
+input[type=text] {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    
+    width: 80%;
+}
+
+button {
+    margin: 5px;
+}
