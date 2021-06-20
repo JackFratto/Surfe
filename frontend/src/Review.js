@@ -5,11 +5,15 @@ import React from 'react';
 class Review extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {textValue: '', stars: 1};
+        this.state = {
+        textValue: '',
+        rating: 1,
+        };
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.leaveRating = this.leaveRating.bind(this)
+        this.changeStars = this.changeStars.bind(this)
     }
 
     handleChange(event) {
@@ -17,32 +21,30 @@ class Review extends React.Component {
     }
     
     leaveRating(event) {
-        this.setState({stars: event.target.value})
+        this.setState({rating: event.target.value})
+
+        console.log(event)
         //prevent form from submitting on button click
         event.preventDefault();
+    }
 
+    changeStars(rating){
+        this.setState({rating: rating});
     }
 
     handleSubmit(event) {
         console.log("Comment logged " + this.state.textValue)
-        console.log("Stars: " + this.state.stars)
+        console.log("Stars: " + this.state.rating)
         event.preventDefault();
     }
 
     render() {
-
-        const stars = []
-        
-        for (let i = 1; i <= 5; i++) {
-            stars.push(<Star click={this.leaveRating} value={i} key={"star" + i}/>);
-        }
-
         return(
             <div className="Container">
                 <form onSubmit={this.handleSubmit}>
                     <p>Please leave a rating</p>
-                    {stars}
-                    <textarea type="text" value={this.state.value} onChange={this.handleChange} />
+                    <Star rating={this.state.rating} count={5} active_color={"Yellow"} setRating={this.changeStars} />
+                    <textarea type="text" value={this.state.textValue} onChange={this.handleChange} />
                     <input type="submit" value="Submit" />
                 </form>
             </div>
